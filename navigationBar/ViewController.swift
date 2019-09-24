@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     private func setupNavigationBar() {
         let searchController = UISearchController(searchResultsController: nil)
         
+        searchController.searchBar.delegate = self
+        
         /// Everything related to the large title and making it work.
         navigationController?.navigationBar.prefersLargeTitles  = true
         extendedLayoutIncludesOpaqueBars                        = true
@@ -40,3 +42,20 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("text changing")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("Stopped editting")
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("Begin")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancelled")
+    }
+}
