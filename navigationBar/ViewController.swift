@@ -13,10 +13,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+//        setupSegmentedControl()
     }
     
     private func setupNavigationBar() {
         let searchController = UISearchController(searchResultsController: nil)
+        
+        /// Add segmented control
+        searchController.searchBar.scopeButtonTitles = ["Nearby", "Anywhere"]
         
         searchController.searchBar.delegate = self
         

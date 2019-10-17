@@ -11,13 +11,17 @@ import UIKit
 
 class FitsocietyTheme {
     
-    init(navBar: Bool, searchBar: Bool) {
+    init(navBar: Bool, searchBar: Bool, segmentedControl: Bool) {
         if navBar {
             applyFitsocietyNavigationBarStyle()
         }
         
         if searchBar {
             applyFitsocietySearchBarStyle()
+        }
+        
+        if segmentedControl {
+            applyFitsocietySegmentedControlStyle()
         }
     }
     
@@ -53,6 +57,17 @@ class FitsocietyTheme {
        }
     }
     
+    private func applyFitsocietySegmentedControlStyle() {
+        let segmentedControl  = UISegmentedControl.appearance(whenContainedInInstancesOf: [UINavigationController.self])
+        
+        /// Setup the segmented control
+        let titleTextAttributesNormal = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        segmentedControl.setTitleTextAttributes(titleTextAttributesNormal, for: .normal)
+        segmentedControl.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
+        segmentedControl.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+    }
+    
     private func applyFitsocietySearchBarStyle() {
         let searchBar       = UISearchBar.appearance()
         let searchTextField = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
@@ -60,6 +75,8 @@ class FitsocietyTheme {
         /// Set the tint color for all iOS versions
         searchBar.tintColor     = .white
         searchBar.barTintColor  = .white
+        
+        searchBar.setImage(UIImage(named: "SearchIcon"), for: .search, state: .normal)
         
         /// Set the color for the placeholder text pre iOS13
         searchTextField.attributedPlaceholder = NSAttributedString(
